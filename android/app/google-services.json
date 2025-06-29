@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "129392387818",
+    "project_id": "poolpal-7dfd8",
+    "storage_bucket": "poolpal-7dfd8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129392387818:android:513d9bae67f5e388931993",
+        "android_client_info": {
+          "package_name": "inti.edu.newpoolpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTwS_zA7AVUB7Xm2r9gq0Ld8tnyBNclWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
