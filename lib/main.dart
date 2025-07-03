@@ -8,6 +8,7 @@ import 'screens/admin/admin_dashboard.dart';
 import 'screens/user/user_dashboard.dart';
 import 'utils/constants.dart';
 import 'firebase_options.dart';
+import 'services/status_update_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +64,11 @@ class _AuthWrapperState extends State<AuthWrapper> {
       if (user != null) {
         // Load user data from Firestore
         await Provider.of<local_auth.AuthProvider>(context, listen: false).loadUserFromFirebase();
+        
+        // Run status updates on app launch
+        await StatusUpdateService.updateAllStatuses();
+        StatusUpdateService.setupRealTimeListeners();
+        
         setState(() {
           _userLoaded = true;
         });
@@ -96,18 +102,12 @@ class _AuthWrapperState extends State<AuthWrapper> {
     
     if (user != null && userModel != null) {
       // Check user role and route accordingly
-      print('User role: ${userModel.role}'); // Debug print
-      print('User UID: ${userModel.uid}'); // Debug print
-      
       if (userModel.role == 'admin') {
-        print('Routing to admin dashboard'); // Debug print
         return const AdminDashboard();
       } else {
-        print('Routing to user dashboard'); // Debug print
         return const UserDashboard();
       }
     } else {
-      print('No user found, routing to login'); // Debug print
       return const LoginScreen();
     }
   }

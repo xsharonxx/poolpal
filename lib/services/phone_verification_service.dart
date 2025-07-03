@@ -24,7 +24,6 @@ class PhoneVerificationService {
         verificationCompleted: (PhoneAuthCredential credential) {
           // ⚠️ Do NOT call signInWithCredential() here
           // Instead, we'll handle verification manually
-          print('Auto-verification completed, but we\'ll handle it manually');
         },
         verificationFailed: (FirebaseAuthException e) {
           onError(e.message ?? 'Verification failed');
@@ -63,11 +62,6 @@ class PhoneVerificationService {
       _verificationCodes[formattedPhone] = verificationCode;
       _codeTimestamps[formattedPhone] = DateTime.now();
       
-      print('=== SIMULATED SMS VERIFICATION ===');
-      print('Phone: $formattedPhone');
-      print('Verification Code: $verificationCode');
-      print('=== END SIMULATED SMS ===');
-      
       // In a real app, you would send this code via SMS
       // For now, we'll just simulate it
       onCodeSent(formattedPhone); // Pass phone as verificationId
@@ -82,8 +76,6 @@ class PhoneVerificationService {
     required String smsCode,
   }) async {
     try {
-      print('Verifying OTP without signing in user');
-      
       // Create credential but don't sign in
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId,
@@ -96,10 +88,8 @@ class PhoneVerificationService {
       if (currentUser != null) {
         try {
           await currentUser.linkWithCredential(credential);
-          print('OTP verification successful - phone linked to current user');
           return true;
         } catch (e) {
-          print('OTP verification failed: $e');
           return false;
         }
       } else {
@@ -109,15 +99,12 @@ class PhoneVerificationService {
           await _auth.signInWithCredential(credential);
           // If we get here, the OTP was valid
           await _auth.signOut(); // Sign out immediately
-          print('OTP verification successful - credential is valid');
           return true;
         } catch (e) {
-          print('OTP verification failed: $e');
           return false;
         }
       }
     } catch (e) {
-      print('Error during OTP verification: $e');
       return false;
     }
   }
@@ -132,7 +119,6 @@ class PhoneVerificationService {
       
       // Check if code exists and is not expired
       if (!_verificationCodes.containsKey(phoneNumber)) {
-        print('No verification code found for phone: $phoneNumber');
         return false;
       }
       
@@ -141,7 +127,6 @@ class PhoneVerificationService {
       
       // Check if code is expired (5 minutes)
       if (timestamp != null && DateTime.now().difference(timestamp).inMinutes > 5) {
-        print('Verification code expired for phone: $phoneNumber');
         _verificationCodes.remove(phoneNumber);
         _codeTimestamps.remove(phoneNumber);
         return false;
@@ -149,18 +134,14 @@ class PhoneVerificationService {
       
       // Check if code matches
       if (storedCode == smsCode) {
-        print('Verification code matched for phone: $phoneNumber');
         // Clean up the used code
         _verificationCodes.remove(phoneNumber);
         _codeTimestamps.remove(phoneNumber);
         return true;
       } else {
-        print('Verification code mismatch for phone: $phoneNumber');
-        print('Expected: $storedCode, Received: $smsCode');
         return false;
       }
     } catch (e) {
-      print('Error during code verification: $e');
       return false;
     }
   }
@@ -168,28 +149,14 @@ class PhoneVerificationService {
   // Update phone verification status in Firestore
   Future<void> updatePhoneVerificationStatus(String userId, bool isVerified) async {
     try {
-      print('=== PHONE VERIFICATION UPDATE DEBUG ===');
-      print('Updating phone verification status for user: $userId, isVerified: $isVerified');
-      
       // First check if the document exists
       final docRef = _firestore.collection('users').doc(userId);
       final doc = await docRef.get();
       
-      print('Document exists: ${doc.exists}');
       if (doc.exists) {
-        print('Current document data: ${doc.data()}');
-        print('Current isPhoneVerified value: ${doc.data()?['isPhoneVerified']}');
-        
         // Document exists, update it
         await docRef.update({'isPhoneVerified': isVerified});
-        print('Update operation completed');
-        
-        // Verify the update
-        final updatedDoc = await docRef.get();
-        print('Updated document data: ${updatedDoc.data()}');
-        print('Updated isPhoneVerified value: ${updatedDoc.data()?['isPhoneVerified']}');
       } else {
-        print('Document does not exist, creating new document');
         // Document doesn't exist, create it with basic info
         await docRef.set({
           'uid': userId,
@@ -197,11 +164,8 @@ class PhoneVerificationService {
           'createdAt': FieldValue.serverTimestamp(),
           'role': 'user',
         });
-        print('Document created with isPhoneVerified: $isVerified');
       }
-      print('=== END PHONE VERIFICATION UPDATE DEBUG ===');
     } catch (e) {
-      print('Error updating phone verification status: $e');
       throw Exception('Failed to update phone verification status: $e');
     }
   }

@@ -914,40 +914,30 @@ class _ProfileSectionState extends State<ProfileSection> with WidgetsBindingObse
   }
 
   void _scrollToICSection() {
-    print('Attempting to scroll to IC section');
     if (_icSectionKey.currentContext != null) {
-      print('IC section key context found, scrolling...');
       try {
         Scrollable.ensureVisible(
           _icSectionKey.currentContext!,
           duration: const Duration(milliseconds: 800),
           curve: Curves.easeInOut,
         );
-        print('IC section scroll completed');
       } catch (e) {
-        print('Error scrolling to IC section: $e');
+        // Ignore errors
       }
-    } else {
-      print('IC section key context is null');
     }
   }
 
   void _scrollToLicenseSection() {
-    print('Attempting to scroll to License section');
     if (_licenseSectionKey.currentContext != null) {
-      print('License section key context found, scrolling...');
       try {
         Scrollable.ensureVisible(
           _licenseSectionKey.currentContext!,
           duration: const Duration(milliseconds: 800),
           curve: Curves.easeInOut,
         );
-        print('License section scroll completed');
       } catch (e) {
-        print('Error scrolling to License section: $e');
+        // Ignore errors
       }
-    } else {
-      print('License section key context is null');
     }
   }
 } 

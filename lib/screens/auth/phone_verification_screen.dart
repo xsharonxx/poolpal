@@ -145,29 +145,15 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
       if (success) {
         // Update phone verification status in Firestore for the original user
-        print('=== PHONE VERIFICATION SCREEN DEBUG ===');
-        print('OTP verification successful');
-        print('Original user ID: ${widget.originalUserId}');
-        print('Original user email: ${widget.originalEmail}');
-        
-        // Get the current user (should still be the original email user)
-        final currentUser = FirebaseAuth.instance.currentUser;
-        print('Current user after OTP verification: ${currentUser?.uid}');
-        print('Current user email: ${currentUser?.email}');
-        
-        // Use the original user ID to update the correct document
-        print('Calling updatePhoneVerificationStatus for original user...');
         await _phoneVerificationService.updatePhoneVerificationStatus(
           widget.originalUserId,
           true,
         );
-        print('updatePhoneVerificationStatus completed');
-        
+
         // The user should still be signed in with their original email
         // The AuthProvider's real-time listener will automatically update the UI
         print('Phone verification completed for user: ${widget.originalUserId}');
-        print('User remains signed in with email: ${currentUser?.email}');
-        print('=== END PHONE VERIFICATION SCREEN DEBUG ===');
+        print('User remains signed in with email: ${FirebaseAuth.instance.currentUser?.email}');
 
         setState(() {
           _isLoading = false;

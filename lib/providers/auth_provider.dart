@@ -64,7 +64,7 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print('Error loading user by email: $e');
+      // print('Error loading user by email: $e');
     }
   }
 
@@ -100,7 +100,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       return await _authService.isPhoneNumberExists(phone);
     } catch (e) {
-      print('Error checking phone number existence: $e');
+      // print('Error checking phone number existence: $e');
       rethrow;
     }
   }
@@ -177,7 +177,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       await _authService.sendEmailVerification();
     } catch (e) {
-      print('Error sending email verification: $e');
+      // print('Error sending email verification: $e');
       rethrow;
     }
   }
@@ -186,7 +186,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       await _authService.updateEmailVerificationStatus(userId, isVerified);
     } catch (e) {
-      print('Error updating email verification status: $e');
+      // print('Error updating email verification status: $e');
       rethrow;
     }
   }

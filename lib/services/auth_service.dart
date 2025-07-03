@@ -37,11 +37,9 @@ class AuthService {
       }
       return null;
     } on FirebaseAuthException catch (e) {
-  print('Firebase Error: ${e.code} - ${e.message}');
-  rethrow;
-} catch (e) {
-  print('Unknown error: $e');
-  rethrow;
+      rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -151,7 +149,6 @@ class AuthService {
       
       return querySnapshot.docs.isNotEmpty;
     } catch (e) {
-      print('Error checking phone number existence: $e');
       rethrow;
     }
   }
@@ -166,7 +163,6 @@ class AuthService {
     try {
       await _auth.currentUser?.sendEmailVerification();
     } catch (e) {
-      print('Error sending email verification: $e');
       rethrow;
     }
   }
@@ -179,7 +175,6 @@ class AuthService {
           .doc(userId)
           .update({'isEmailVerified': isVerified});
     } catch (e) {
-      print('Error updating email verification status: $e');
       rethrow;
     }
   }
