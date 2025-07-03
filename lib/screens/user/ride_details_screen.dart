@@ -203,9 +203,6 @@ class _RideDetailsScreenState extends State<RideDetailsScreen> {
             });
           }
         }
-        if (startLatLng == null || endLatLng == null) {
-          // Either startLatLng or endLatLng is null.
-        }
 
         final currentUser = context.read<AuthProvider>().user;
         final isMyOfferedRide = rideData['uid'] == currentUser?.uid;
@@ -467,7 +464,6 @@ class _RideDetailsScreenState extends State<RideDetailsScreen> {
                                               const SizedBox(height: 12),
                                               Text(driverData['bio'], style: const TextStyle(fontSize: 16)),
                                             ],
-                                            // Add more fields as needed
                                           ],
                                         ),
                                       ),
@@ -717,7 +713,7 @@ class _RideDetailsScreenState extends State<RideDetailsScreen> {
         }
       }
     } catch (e) {
-      // Optionally show error
+      print(e);
     }
   }
 } 

@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  // Modern color scheme
-  static const primary = Color(0xFF65B36A);    // Green (Car body)
-  static const secondary = Color(0xFF2C6D5E);  // Dark Teal (Car outline, wheels)
-  static const accent = Color(0xFF6BC1D1);     // Light Teal-Blue (Background top)
-  static const background = Color(0xFF9CE09D); // Mint Green (Background bottom)
+  static const primary = Color(0xFF65B36A);
+  static const secondary = Color(0xFF2C6D5E);
+  static const accent = Color(0xFF6BC1D1);
+  static const background = Color(0xFF9CE09D);
   static const surface = Colors.white;
-  static const error = Color(0xFFEF4444);      // Modern red
+  static const error = Color(0xFFEF4444);
   static const onPrimary = Colors.white;
   static const onSecondary = Colors.white;
-  static const onBackground = Color(0xFF253F3A); // Charcoal (Interior hair, eyes)
-  static const onSurface = Color(0xFF253F3A);   // Charcoal (Interior hair, eyes)
+  static const onBackground = Color(0xFF253F3A);
+  static const onSurface = Color(0xFF253F3A);
   static const onError = Colors.white;
-  
-  // Additional colors
-  static const cardGradientStart = Color(0xFF6BC1D1); // Light Teal-Blue
-  static const cardGradientEnd = Color(0xFF9CE09D);   // Mint Green
-  static const inputBackground = Color(0xFFE0E0E0);   // Skin tone (Faces)
+
+  static const cardGradientStart = Color(0xFF6BC1D1);
+  static const cardGradientEnd = Color(0xFF9CE09D);
+  static const inputBackground = Color(0xFFE0E0E0);
 }
 
 class AppTheme {

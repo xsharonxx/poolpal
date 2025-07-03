@@ -778,6 +778,7 @@ class _FindRidePageState extends State<_FindRidePage> {
                             );
                           },
                           isMyOfferedRide: false,
+                          hideApplications: true,
                         );
                       },
                     );

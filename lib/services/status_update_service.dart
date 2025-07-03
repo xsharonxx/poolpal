@@ -7,24 +7,19 @@ class StatusUpdateService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static Timer? _periodicTimer;
 
-  /// Update all statuses on app launch
+  // Update all statuses on app launch
   static Future<void> updateAllStatuses() async {
     final user = _auth.currentUser;
     if (user == null) return;
 
     final now = Timestamp.now();
-    
-    // Update rides offered by user
+
     await _updateOfferedRides(user.uid, now);
-    
-    // Update rides user joined
     await _updateJoinedRides(user.uid, now);
-    
-    // Update user's applications
     await _updateUserApplications(user.uid, now);
   }
 
-  /// Update rides offered by the user
+  // Update rides offered by the user
   static Future<void> _updateOfferedRides(String userId, Timestamp now) async {
     final ridesQuery = await _firestore
         .collection('rides')
@@ -53,7 +48,7 @@ class StatusUpdateService {
     }
   }
 
-  /// Update rides the user joined
+  // Update rides the user joined
   static Future<void> _updateJoinedRides(String userId, Timestamp now) async {
     // Get accepted applications by user
     final applicationsQuery = await _firestore
@@ -91,7 +86,7 @@ class StatusUpdateService {
     }
   }
 
-  /// Update user's applications that haven't been responded to
+  // Update user's applications that haven't been responded to
   static Future<void> _updateUserApplications(String userId, Timestamp now) async {
     final applicationsQuery = await _firestore
         .collection('applications')
@@ -128,7 +123,7 @@ class StatusUpdateService {
     }
   }
 
-  /// Set up real-time listeners for ongoing updates
+  // Set up real-time listeners for ongoing updates
   static void setupRealTimeListeners() {
     final user = _auth.currentUser;
     if (user == null) return;
@@ -162,7 +157,7 @@ class StatusUpdateService {
     });
   }
 
-  /// Handle real-time ride updates
+  // Handle real-time ride updates
   static Future<void> _handleRideUpdates(List<QueryDocumentSnapshot> rides, String userId) async {
     final now = Timestamp.now();
     final batch = _firestore.batch();
@@ -186,7 +181,7 @@ class StatusUpdateService {
     }
   }
 
-  /// Handle real-time application updates
+  // Handle real-time application updates
   static Future<void> _handleApplicationUpdates(List<QueryDocumentSnapshot> applications, String userId) async {
     final now = Timestamp.now();
     final batch = _firestore.batch();
@@ -217,7 +212,7 @@ class StatusUpdateService {
     }
   }
 
-  /// Clean up listeners and timers
+  // Clean up listeners and timers
   static void dispose() {
     _periodicTimer?.cancel();
     _periodicTimer = null;

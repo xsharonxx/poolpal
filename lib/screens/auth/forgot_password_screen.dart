@@ -65,8 +65,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF6BC1D1), // Top
-              Color(0xFF9CE09D), // Bottom
+              Color(0xFF6BC1D1),
+              Color(0xFF9CE09D),
             ],
           ),
         ),

@@ -489,9 +489,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 CircleAvatar(
                   radius: 32,
                   backgroundImage: NetworkImage(photoUrl),
-                  onBackgroundImageError: (exception, stackTrace) {
-                    // Handle image loading error
-                  },
+                  onBackgroundImageError: (exception, stackTrace) {},
                 )
               else
                 CircleAvatar(

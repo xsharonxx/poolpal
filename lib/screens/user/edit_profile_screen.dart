@@ -420,7 +420,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 'race': selectedRace,
                                 if (photoUrl != null) 'photoUrl': photoUrl,
                               };
-                              // Parse dateOfBirth to ISO string if needed
+                              // Parse dateOfBirth to ISO string
                               if (dobController.text.isNotEmpty) {
                                 updateData['dateOfBirth'] = dobController.text;
                               }

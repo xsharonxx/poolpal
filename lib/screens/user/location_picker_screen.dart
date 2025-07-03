@@ -158,7 +158,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
         });
       }
     } catch (e) {
-      // Remove all print statements
+      print(e);
     }
   }
 

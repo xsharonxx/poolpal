@@ -67,9 +67,9 @@ class AuthService {
         dateOfBirth: dateOfBirth,
         gender: gender,
         race: race,
-        role: 'user', // Default role
+        role: 'user',
         createdAt: DateTime.now(),
-        isEmailVerified: false, // Initially false, will be updated when user verifies email
+        isEmailVerified: false,
         isPhoneVerified: false,
         isICVerified: false,
         isLicenseVerified: false,
@@ -103,39 +103,6 @@ class AuthService {
     } catch (e) {
       rethrow;
     }
-  }
-
-  // Phone verification methods
-  final PhoneVerificationService _phoneVerificationService = PhoneVerificationService();
-
-  Future<void> sendPhoneVerificationCode({
-    required String phoneNumber,
-    required Function(String) onCodeSent,
-    required Function(String) onError,
-  }) async {
-    await _phoneVerificationService.sendVerificationCode(
-      phoneNumber: phoneNumber,
-      onCodeSent: onCodeSent,
-      onError: onError,
-    );
-  }
-
-  Future<bool> verifyPhoneCode({
-    required String verificationId,
-    required String smsCode,
-  }) async {
-    return await _phoneVerificationService.verifyCode(
-      verificationId: verificationId,
-      smsCode: smsCode,
-    );
-  }
-
-  Future<void> updatePhoneVerificationStatus(String userId, bool isVerified) async {
-    await _phoneVerificationService.updatePhoneVerificationStatus(userId, isVerified);
-  }
-
-  Future<bool> getPhoneVerificationStatus(String userId) async {
-    return await _phoneVerificationService.getPhoneVerificationStatus(userId);
   }
 
   // Check if phone number already exists

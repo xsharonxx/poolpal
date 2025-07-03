@@ -45,29 +45,6 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  // Load user data by email (for phone verification scenario)
-  Future<void> loadUserByEmail(String email) async {
-    try {
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: email)
-          .limit(1)
-          .get();
-      
-      if (querySnapshot.docs.isNotEmpty) {
-        final userData = querySnapshot.docs.first;
-        _user = UserModel.fromMap({
-          'uid': userData.id,
-          ...userData.data(),
-        });
-        _startUserListener(userData.id);
-        notifyListeners();
-      }
-    } catch (e) {
-      // print('Error loading user by email: $e');
-    }
-  }
-
   // Stop listening to user document changes
   void _stopUserListener() {
     _userListener?.cancel();
@@ -100,7 +77,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       return await _authService.isPhoneNumberExists(phone);
     } catch (e) {
-      // print('Error checking phone number existence: $e');
+      print('Error checking phone number existence: $e');
       rethrow;
     }
   }
@@ -177,7 +154,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       await _authService.sendEmailVerification();
     } catch (e) {
-      // print('Error sending email verification: $e');
+      print('Error sending email verification: $e');
       rethrow;
     }
   }
@@ -186,7 +163,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       await _authService.updateEmailVerificationStatus(userId, isVerified);
     } catch (e) {
-      // print('Error updating email verification status: $e');
+      print('Error updating email verification status: $e');
       rethrow;
     }
   }

@@ -6,7 +6,7 @@ class UserModel {
   final DateTime? dateOfBirth;
   final String? gender;
   final String? race;
-  final String role; // 'admin' or 'user'
+  final String role; 
   final DateTime createdAt;
   final bool? isEmailVerified;
   final bool? isPhoneVerified;
@@ -14,7 +14,6 @@ class UserModel {
   final bool? isLicenseVerified;
   final String? photoUrl;
 
-  /// For user: all fields required. For admin: only fullName, email, role, uid, createdAt required.
   UserModel({
     required this.uid,
     required this.fullName,

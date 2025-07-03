@@ -54,13 +54,6 @@ class Validators {
     return null;
   }
 
-  static bool isValidPhoneNumber(String value) {
-    // Basic international phone number validation
-    // Allows + followed by country code and number
-    final phoneRegex = RegExp(r'^\+?[1-9]\d{1,14}$');
-    return phoneRegex.hasMatch(value.replaceAll(RegExp(r'[\s\-\(\)]'), ''));
-  }
-
   static String? validateRequired(String? value, String fieldName) {
     if (value == null || value.isEmpty) {
       return '$fieldName is required';

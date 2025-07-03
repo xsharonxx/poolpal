@@ -39,8 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
         // Check verification status
         final authProvider = context.read<AuthProvider>();
         final user = authProvider.user;
-        final isEmailVerified = authProvider.isEmailVerified();
-        final isPhoneVerified = user?.isPhoneVerified ?? false;
 
         // Navigate based on user role
         if (authProvider.isAdmin) {
@@ -94,8 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF6BC1D1), // Top
-              Color(0xFF9CE09D), // Bottom
+              Color(0xFF6BC1D1),
+              Color(0xFF9CE09D),
             ],
           ),
         ),
@@ -109,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Logo as a circular image (no white background)
+                    // Logo
                     Center(
                       child: ClipOval(
                         child: Image.asset(
@@ -218,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: _obscurePassword,
                     ),
                     const SizedBox(height: 8),
-                    // Forgot password only for email login
+                    // Forgot password
                     Row(
                       children: [
                         const Spacer(),

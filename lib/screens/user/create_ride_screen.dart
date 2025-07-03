@@ -635,21 +635,6 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
   double _deg2rad(double deg) {
     return deg * (pi / 180);
   }
-
-  double _getZoomLevel(LatLng start, LatLng end) {
-    final distance = _calculateDistance(start.latitude, start.longitude, end.latitude, end.longitude);
-    if (distance < 1) {
-      return 16;
-    } else if (distance < 5) {
-      return 14;
-    } else if (distance < 20) {
-      return 12;
-    } else if (distance < 50) {
-      return 10;
-    } else {
-      return 8;
-    }
-  }
 }
 
 // Custom formatter to capitalize all input

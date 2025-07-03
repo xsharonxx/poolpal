@@ -150,11 +150,6 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
           true,
         );
 
-        // The user should still be signed in with their original email
-        // The AuthProvider's real-time listener will automatically update the UI
-        print('Phone verification completed for user: ${widget.originalUserId}');
-        print('User remains signed in with email: ${FirebaseAuth.instance.currentUser?.email}');
-
         setState(() {
           _isLoading = false;
         });
@@ -223,7 +218,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 // Phone number display (read-only)
                 TextFormField(
                   controller: _phoneController,
-                  enabled: false, // Make it read-only
+                  enabled: false,
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
                     prefixIcon: const Icon(Icons.phone),

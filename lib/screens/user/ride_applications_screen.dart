@@ -56,8 +56,8 @@ class _RideApplicationsScreenState extends State<RideApplicationsScreen> with Si
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF6BC1D1), // Light Teal-Blue (top)
-              Color(0xFF9CE09D), // Mint Green (bottom)
+              Color(0xFF6BC1D1),
+              Color(0xFF9CE09D),
             ],
           ),
         ),
